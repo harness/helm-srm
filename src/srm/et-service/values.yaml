@@ -1,0 +1,145 @@
+# Default values for et-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  loadbalancerURL: "http://test/abc"
+
+replicaCount: 1
+maxSurge: 100%
+maxUnavailable: 0
+
+image:
+  registry: docker.io
+  repository: harness/error-tracking-signed
+  pullPolicy: IfNotPresent
+  tag: "5.3.0"
+  digest: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+## -- initContainer for Harness application waits
+waitForInitContainer:
+  image:
+    registry: docker.io
+    repository: harness/helm-init-container
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    digest: ""
+
+# Postgres secret value and key
+postgresPassword:
+  name: postgres
+  key: postgres-password
+
+et:
+  logLevel: INFO
+
+  java:
+    enableHeapDump: false
+    heapSize: "6400m"
+
+  redis:
+    enabled: true
+    host:
+    port: 6379
+    trimCronExpression: "@hourly"
+    streamLength: 1000
+    useSentinel: true
+
+  hikari:
+    maximumPoolSize: 10
+    connectionTimeout: 60000
+
+livenessProbe:
+  enabled: true
+  periodSeconds: 10
+  initialDelaySeconds: 60
+  failureThreshold: 3
+  successThreshold: 1
+  timeoutSeconds: 1
+
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 80
+  periodSeconds: 10
+  failureThreshold: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  periodSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+  timeoutSeconds: 1
+
+# serviceAccount:
+#   # Specifies whether a service account should be created
+#   create: true
+#   # Annotations to add to the service account
+#   annotations: {}
+#   # The name of the service account to use.
+#   # If not set and create is true, a name is generated using the fullname template
+#   name: ""
+
+# Temp Hack to solve the following, will be fix soon .
+#   User "system:serviceaccount:harness-1:harness-et-service" cannot list resource "pods" in API group "" in the namespace "harness-1"
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "harness-default"
+
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext:
+  runAsUser: 65534
+  runAsNonRoot: true
+
+service:
+  type: ClusterIP
+  port: 9191
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: et-service
+      paths:
+      - path: /
+        backend:
+          serviceName: et-service
+          servicePort: 9191
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 8Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
