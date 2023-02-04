@@ -18,6 +18,20 @@ entries:
   et-receiver:
   - apiVersion: v2
     appVersion: 5.3.0
+    created: "2023-02-04T03:39:24.285055836Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: f7dbe37d8286453c11a80d447f33697c5a82b322605e1b2cfe084b7fe21b98f1
+    name: et-receiver
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/et-receiver-0.1.11/et-receiver-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
+    appVersion: 5.3.0
     created: "2022-12-28T13:29:33.160106809Z"
     dependencies:
     - name: harness-common
@@ -46,6 +60,43 @@ entries:
     - https://github.com/harness/helm-srm/releases/download/et-service-0.1.16/et-service-0.1.16.tgz
     version: 0.1.16
   srm:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-04T03:39:24.480643763Z"
+    dependencies:
+    - name: et-service
+      repository: file://../et-service
+      version: 0.1.x
+    - name: et-collector
+      repository: file://../et-collector
+      version: 0.1.x
+    - alias: et-receiver-hit
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.1.x
+    - alias: et-receiver-decompile
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.1.x
+    - alias: et-receiver-sql
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.1.x
+    - alias: et-receiver-agent
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.1.x
+    description: A Helm chart for SRM
+    digest: c4d71c5d1411fdf4fc5d612a48c1badea92dc8da3ae7cc8b6b1d82b36f66b329
+    name: srm
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/srm-0.3.1/srm-0.3.1.tgz
+    version: 0.3.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-12-12T13:25:29.159921492Z"
@@ -83,4 +134,4 @@ entries:
     urls:
     - https://github.com/harness/helm-srm/releases/download/srm-0.3.0/srm-0.3.0.tgz
     version: 0.3.0
-generated: "2022-12-28T13:29:33.32864878Z"
+generated: "2023-02-04T03:39:24.480658263Z"
