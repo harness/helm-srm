@@ -1,4 +1,4 @@
-enable-receivers: true
+enable-receivers: false
 
 et-service:
   image:
