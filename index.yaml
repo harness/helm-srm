@@ -62,6 +62,43 @@ entries:
   srm:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-13T18:35:35.668900848Z"
+    dependencies:
+    - name: et-service
+      repository: file://../et-service
+      version: 0.2.x
+    - name: et-collector
+      repository: file://../et-collector
+      version: 0.2.x
+    - alias: et-receiver-hit
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.2.x
+    - alias: et-receiver-decompile
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.2.x
+    - alias: et-receiver-sql
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.2.x
+    - alias: et-receiver-agent
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.2.x
+    description: A Helm chart for SRM
+    digest: f3b7084c2a864a18b2c8e52272d0c7339150eb25f8b9735a96cb8b2d3d46fe16
+    name: srm
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/srm-0.5.0/srm-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-21T14:56:23.410060061Z"
     dependencies:
     - name: et-service
@@ -245,4 +282,4 @@ entries:
     urls:
     - https://github.com/harness/helm-srm/releases/download/srm-0.3.0/srm-0.3.0.tgz
     version: 0.3.0
-generated: "2023-02-21T14:56:23.410084661Z"
+generated: "2023-03-13T18:35:35.668925148Z"
