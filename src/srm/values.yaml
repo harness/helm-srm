@@ -2,13 +2,13 @@ enable-receivers: false
 
 et-service:
   image:
-    tag: "5.14.2"
+    tag: "5.18.0"
   autoscaling:
     enabled: false
 
 et-collector:
   image:
-    tag: "5.14.0"
+    tag: "5.18.0"
   autoscaling:
     enabled: false
 
