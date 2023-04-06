@@ -53,7 +53,7 @@ spec:
 
           envFrom:
           - configMapRef:
-              name: {{ .Values.name }}-env
+              name: {{ include "et-receiver.name" . }}-env
 
           env:
           - name: DB_PASS
@@ -108,7 +108,7 @@ spec:
       volumes:
       - name: et-private
         configMap:
-          name: {{ .Values.name }}-config
+          name: {{ include "et-receiver.name" . }}-config
           items:
           - key: application.properties
             path: application.properties
