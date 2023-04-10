@@ -14,16 +14,16 @@ et-collector:
 
 et-receiver-agent:
   image:
-    tag: "5.14.2"
+    tag: "5.18.0"
 
 et-receiver-decompile:
   image:
-    tag: "5.14.2"
+    tag: "5.18.0"
 
 et-receiver-hit:
   image:
-    tag: "5.14.2"
+    tag: "5.18.0"
 
 et-receiver-sql:
   image:
-    tag: "5.14.2"
+    tag: "5.18.0"
