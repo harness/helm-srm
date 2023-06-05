@@ -6,9 +6,7 @@ metadata:
   labels:
     {{- include "et-service.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "et-service.selectorLabels" . | nindent 6 }}
@@ -58,6 +56,9 @@ spec:
           ports:
             - name: http
               containerPort: 9191
+              protocol: TCP
+            - name: collector
+              containerPort: {{ .Values.service.collectorPort }}
               protocol: TCP
 
           envFrom:
