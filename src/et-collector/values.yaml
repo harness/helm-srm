@@ -101,8 +101,8 @@ affinity: {}
 
 et:
   logLevel: INFO
-  backendURL: http://et-service:9191
-  storageTestURL: http://et-service:9191/service/png
+  backendURL: http://et-service:6071
+  storageTestURL: http://et-service:6071/service/png
   redis:
     enabled: false
     host:

@@ -30,6 +30,9 @@ data:
     spring.profiles.active=postgresql,msg_redis,hit
     redis.consumer.group=hit
 {{- end }}
+    harness.gitsync.target={{ .Values.et.grpc.gitsyncTarget }}
+    harness.gitsync.authority={{ .Values.et.grpc.gitsyncAuthority }}
+    harness.gitsync.enableSsl={{ .Values.et.grpc.gitsyncSSL }}
 
   application-msg_redis.properties: |-
     spring.cache.type=redis
@@ -44,6 +47,14 @@ data:
     management.health.redis.enabled=true
     redis.stream.trimCronExpression={{ .Values.et.redis.trimCronExpression }}
     redis.stream.streamLength={{ .Values.et.redis.streamLength }}
+    redis.stream.AddHit.maxLength={{ .Values.et.redis.streamLengths.AddHit }}
+    redis.stream.ServiceStats.maxLength={{ .Values.et.redis.streamLengths.ServiceStats }}
+    redis.stream.AgentStats.maxLength={{ .Values.et.redis.streamLengths.AgentStats }}
+    redis.stream.DeferredAgentStats.maxLength={{ .Values.et.redis.streamLengths.DeferredAgentStats }}
+    redis.stream.Decompile.maxLength={{ .Values.et.redis.streamLengths.Decompile }}
+    redis.stream.SQL_Insertion.maxLength={{ .Values.et.redis.streamLengths.SQL_Insertion }}
+    redis.stream.SQL_LocInvInsertion.maxLength={{ .Values.et.redis.streamLengths.SQL_LocInvInsertion }}
+    redis.stream.SQL_MetricInsertion.maxLength={{ .Values.et.redis.streamLengths.SQL_MetricInsertion }}
 
   application-postgresql.properties: |-
     spring.datasource.url=jdbc:postgresql://${DB_URL}/overops?useLegacyDatetimeCode=false&rewriteBatchedStatements=true
