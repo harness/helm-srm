@@ -56,11 +56,30 @@ spec:
               name: {{ include "et-receiver.name" . }}-env
 
           env:
+          {{- if .Values.global.database.postgres.installed }}
+          - name: DB_USER
+            value: postgres
+          - name: DB_URL
+            value: postgres:5432
           - name: DB_PASS
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.postgresPassword.name }}
                 key: {{ .Values.postgresPassword.key }}
+          {{- else }}
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.database.postgres.secretName }}
+                key: {{ .Values.global.database.postgres.userKey }}
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.database.postgres.secretName }}
+                key: {{ .Values.global.database.postgres.passwordKey }}
+          - name: DB_URL
+            value: {{ (index .Values.global.database.postgres.hosts 0) }}
+          {{- end }}
 
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
