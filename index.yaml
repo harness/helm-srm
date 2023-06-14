@@ -3,6 +3,20 @@ entries:
   et-collector:
   - apiVersion: v2
     appVersion: 5.0.7
+    created: "2023-06-14T18:59:54.617519559Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 1380ecdc70ef0c2018328b1d843f38ff3ccbb8cd29cc6650c34351d1465a3194
+    name: et-collector
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/et-collector-0.4.0/et-collector-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 5.0.7
     created: "2023-05-29T16:19:53.115081758Z"
     dependencies:
     - name: harness-common
@@ -44,6 +58,20 @@ entries:
     - https://github.com/harness/helm-srm/releases/download/et-collector-0.1.8/et-collector-0.1.8.tgz
     version: 0.1.8
   et-receiver:
+  - apiVersion: v2
+    appVersion: 5.3.0
+    created: "2023-06-14T18:59:54.79251683Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 2051e3b9bac0467f68d30946c2604021aab79886cd820390bb4b20ab9027b95c
+    name: et-receiver
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/et-receiver-0.4.0/et-receiver-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 5.3.0
     created: "2023-05-29T16:19:53.289899255Z"
@@ -103,6 +131,20 @@ entries:
   et-service:
   - apiVersion: v2
     appVersion: 5.3.0
+    created: "2023-06-14T18:59:54.981426185Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Harness ET Service
+    digest: ecf17ebbdc64d2c2be6f44dc7b9613ca0a0a999fc98fa1a7501f3df204998019
+    name: et-service
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/et-service-0.4.0/et-service-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 5.3.0
     created: "2023-05-29T16:19:53.469013948Z"
     dependencies:
     - name: harness-common
@@ -144,6 +186,43 @@ entries:
     - https://github.com/harness/helm-srm/releases/download/et-service-0.1.16/et-service-0.1.16.tgz
     version: 0.1.16
   srm:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-14T18:59:55.161041826Z"
+    dependencies:
+    - name: et-service
+      repository: file://../et-service
+      version: 0.4.x
+    - name: et-collector
+      repository: file://../et-collector
+      version: 0.4.x
+    - alias: et-receiver-hit
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.4.x
+    - alias: et-receiver-decompile
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.4.x
+    - alias: et-receiver-sql
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.4.x
+    - alias: et-receiver-agent
+      condition: enable-receivers
+      name: et-receiver
+      repository: file://../et-receiver
+      version: 0.4.x
+    description: A Helm chart for SRM
+    digest: ba80aea5aa136e43374bbb861a926a675cf5bc605c3a5cae44174ed4ab8dc553
+    name: srm
+    type: application
+    urls:
+    - https://github.com/harness/helm-srm/releases/download/srm-0.7.2/srm-0.7.2.tgz
+    version: 0.7.2
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-05-29T16:19:53.618831172Z"
@@ -440,4 +519,4 @@ entries:
     urls:
     - https://github.com/harness/helm-srm/releases/download/srm-0.3.0/srm-0.3.0.tgz
     version: 0.3.0
-generated: "2023-05-29T16:19:53.618913321Z"
+generated: "2023-06-14T18:59:55.161124343Z"
