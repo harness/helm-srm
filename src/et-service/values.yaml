@@ -152,6 +152,13 @@ resources:
     cpu: 100m
     memory: 8Gi
 
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPU: ""
+  targetMemory: ""
+
 nodeSelector: {}
 
 tolerations: []
