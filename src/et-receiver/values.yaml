@@ -88,7 +88,7 @@ resources:
     cpu: 2
     memory: 2Gi
   requests:
-    cpu: 100m
+    cpu: 250m
     memory: 2Gi
 
 autoscaling:
@@ -115,6 +115,15 @@ et:
     trimCronExpression: "@hourly"
     streamLength: 500
     useSentinel: true
+    streamLengths:
+      AddHit: 2500
+      ServiceStats: 1000
+      AgentStats: 2500
+      DeferredAgentStats: 1000
+      Decompile: 1000
+      SQL_Insertion: 2500
+      SQL_LocInvInsertion: 2500
+      SQL_MetricInsertion: 2500
 
   redisQueue:
     type: hit
@@ -122,3 +131,7 @@ et:
   hikari:
     maximumPoolSize: 10
     connectionTimeout: 60000
+  grpc:
+    gitsyncTarget: ng-manager:13002
+    gitsyncAuthority: ng-manager:13002
+    gitsyncSSL: false

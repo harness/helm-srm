@@ -12,5 +12,10 @@ spec:
       targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
+    - port: {{ .Values.service.collectorPort }}
+      targetPort: {{ .Values.service.collectorPort }}
+      protocol: TCP
+      name: collector
   selector:
     {{- include "et-service.selectorLabels" . | nindent 4 }}
+  sessionAffinity: ClientIP

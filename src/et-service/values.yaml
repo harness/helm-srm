@@ -36,6 +36,12 @@ postgresPassword:
 et:
   logLevel: INFO
 
+  dataRetention:
+    verbose: false
+    days: 90
+    schedule: "0 0 2 * * *"
+    batchSize: 1000
+
   java:
     enableHeapDump: false
     heapSize: "6400m"
@@ -47,10 +53,28 @@ et:
     trimCronExpression: "@hourly"
     streamLength: 1000
     useSentinel: true
+    streamLengths:
+      AddHit: 2500
+      ServiceStats: 1000
+      AgentStats: 2500
+      DeferredAgentStats: 1000
+      Decompile: 1000
+      SQL_Insertion: 2500
+      SQL_LocInvInsertion: 2500
+      SQL_MetricInsertion: 2500
 
   hikari:
     maximumPoolSize: 10
     connectionTimeout: 60000
+
+  grpc:
+    gitsyncTarget: ng-manager:13002
+    gitsyncAuthority: ng-manager:13002
+    gitsyncSSL: false
+
+  harness:
+    cvngURL: http://cv-nextgen:6060
+    ngManagerURL: http://ng-manager:7090
 
 livenessProbe:
   enabled: true
@@ -108,6 +132,7 @@ securityContext:
 service:
   type: ClusterIP
   port: 9191
+  collectorPort: 6071
 
 ingress:
   enabled: false

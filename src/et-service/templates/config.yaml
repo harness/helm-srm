@@ -4,7 +4,6 @@ metadata:
   name: et-service-env
   namespace: {{ .Release.Namespace }}
 data:
-  APP_TOKEN_JWT_SECRET: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
   HOST_URL: "et-service"
   APP_ACL_URL: "{{ .Values.global.loadbalancerURL }}/authz/api/"
   JVM_HEAPSIZE: "{{ .Values.et.java.heapSize }}"
@@ -22,14 +21,26 @@ metadata:
 data:
   application.properties: |-
     logging.level.root={{ .Values.et.logLevel }}
+    collector.listen.port={{ .Values.service.collectorPort }}
     {{- if .Values.et.redis.enabled }}
     spring.profiles.active=postgresql,msg_redis,service_stats
     redis.consumer.group=backend
     {{- else }}
     spring.profiles.active=postgresql,msg_inline
     {{- end }}
-    jwt.secretKey=${APP_TOKEN_JWT_SECRET}
+
+    {{- if .Values.et.dataRetention.verbose }}
+    logging.level.com.overops.dataretention=DEBUG
+    {{- end }}
+    harness.dataretention.days={{ .Values.et.dataRetention.days }}
+    harness.dataretention.schedule={{ .Values.et.dataRetention.schedule }}
+    harness.dataretention.batchsize={{ .Values.et.dataRetention.batchSize }}
     harness.api.gateway={{ .Values.global.loadbalancerURL }}/gateway
+    harness.gitsync.target={{ .Values.et.grpc.gitsyncTarget }}
+    harness.gitsync.authority={{ .Values.et.grpc.gitsyncAuthority }}
+    harness.gitsync.enableSsl={{ .Values.et.grpc.gitsyncSSL }}
+    ng.manager.service.url={{ .Values.et.harness.ngManagerURL }}
+    cvng.url={{ .Values.et.harness.cvngURL }}
 
   application-postgresql.properties: |-
     spring.datasource.url=jdbc:postgresql://${DB_URL}/overops?useLegacyDatetimeCode=false&rewriteBatchedStatements=true
@@ -65,4 +76,12 @@ data:
     management.health.redis.enabled=true
     redis.stream.trimCronExpression={{ .Values.et.redis.trimCronExpression }}
     redis.stream.streamLength={{ .Values.et.redis.streamLength }}
+    redis.stream.AddHit.maxLength={{ .Values.et.redis.streamLengths.AddHit }}
+    redis.stream.ServiceStats.maxLength={{ .Values.et.redis.streamLengths.ServiceStats }}
+    redis.stream.AgentStats.maxLength={{ .Values.et.redis.streamLengths.AgentStats }}
+    redis.stream.DeferredAgentStats.maxLength={{ .Values.et.redis.streamLengths.DeferredAgentStats }}
+    redis.stream.Decompile.maxLength={{ .Values.et.redis.streamLengths.Decompile }}
+    redis.stream.SQL_Insertion.maxLength={{ .Values.et.redis.streamLengths.SQL_Insertion }}
+    redis.stream.SQL_LocInvInsertion.maxLength={{ .Values.et.redis.streamLengths.SQL_LocInvInsertion }}
+    redis.stream.SQL_MetricInsertion.maxLength={{ .Values.et.redis.streamLengths.SQL_MetricInsertion }}
   {{- end }}

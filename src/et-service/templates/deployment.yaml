@@ -59,6 +59,9 @@ spec:
             - name: http
               containerPort: 9191
               protocol: TCP
+            - name: collector
+              containerPort: {{ .Values.service.collectorPort }}
+              protocol: TCP
 
           envFrom:
           - configMapRef:
