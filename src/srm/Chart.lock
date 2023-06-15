@@ -1,21 +1,21 @@
 dependencies:
 - name: et-service
   repository: file://../et-service
-  version: 0.3.0
+  version: 0.4.1
 - name: et-collector
   repository: file://../et-collector
-  version: 0.3.0
+  version: 0.4.1
 - name: et-receiver
   repository: file://../et-receiver
-  version: 0.3.1
+  version: 0.4.1
 - name: et-receiver
   repository: file://../et-receiver
-  version: 0.3.1
+  version: 0.4.1
 - name: et-receiver
   repository: file://../et-receiver
-  version: 0.3.1
+  version: 0.4.1
 - name: et-receiver
   repository: file://../et-receiver
-  version: 0.3.1
-digest: sha256:46f857535677f325eade45c37521eb1dd9c919f00e4293375de756365b95cbfc
-generated: "2023-04-06T20:30:28.993743+05:30"
+  version: 0.4.1
+digest: sha256:8e92fa4c8407f36a7e00953029234a8e9e9e9e278406071054de2b5c2ba43bcd
+generated: "2023-06-15T15:42:04.423165-06:00"
