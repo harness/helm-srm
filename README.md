@@ -1,1 +1,1 @@
-src/cet/README.md
+src/srm/README.md
