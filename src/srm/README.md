@@ -1,8 +1,8 @@
-## Harness CET Chart
+## Harness SRM Chart
 
-A Helm chart for CET
+A Helm chart for SRM
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 ## Usage
 
@@ -10,9 +10,9 @@ Use the following dependency to add this chart repository to your Helm installat
 
 ```
 dependencies:
-    - name: cet
+    - name: srm
       repository: https://harness.github.io/helm-srm
-      version: 0.7.0
+      version: 0.8.0
 ```
 
 ## Values
