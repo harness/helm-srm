@@ -2,13 +2,13 @@ enable-receivers: false
 
 et-service:
   image:
-    tag: "5.23.1"
+    tag: "5.23.2"
   autoscaling:
     enabled: false
 
 et-collector:
   image:
-    tag: "5.23.0"
+    tag: "5.23.1"
   autoscaling:
     enabled: false
 
@@ -17,25 +17,25 @@ et-receiver-agent:
     redisQueue:
       type: agent
   image:
-    tag: "5.23.1"
+    tag: "5.23.2"
 
 et-receiver-decompile:
   et:
     redisQueue:
       type: decompile
   image:
-    tag: "5.23.1"
+    tag: "5.23.2"
 
 et-receiver-hit:
   et:
     redisQueue:
       type: hit
   image:
-    tag: "5.23.1"
+    tag: "5.23.2"
 
 et-receiver-sql:
   et:
     redisQueue:
       type: sql
   image:
-    tag: "5.23.1"
+    tag: "5.23.2"
