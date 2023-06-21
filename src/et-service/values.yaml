@@ -3,6 +3,25 @@
 # Declare variables to be passed into your templates.
 global:
   loadbalancerURL: "http://test/abc"
+  kubeVersion: ""
+  imagePullSecrets: []
+  database:
+    postgres:
+      ## - installed = true if installed within cluster
+      installed: true
+      ## - protocol to use for connection
+      protocol: postgres
+      ## - host array for external
+      hosts:
+        - postgres:5432
+      ## - secret name containing external values
+      secretName: ""
+      ## - key within secret containing username
+      userKey: ""
+      ## - key within secret containing password
+      passwordKey: ""
+      ## - extra arguments set to connection string
+      extraArgs: ""
 
 replicaCount: 1
 maxSurge: 100%
