@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cet
+name: srm
 description: A Helm chart for CET
 type: application
 # This is the chart version. This version should be incremented each time you make changes
