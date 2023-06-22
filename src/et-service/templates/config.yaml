@@ -36,7 +36,8 @@ data:
     harness.gitsync.target={{ .Values.et.grpc.gitsyncTarget }}
     harness.gitsync.authority={{ .Values.et.grpc.gitsyncAuthority }}
     harness.gitsync.enableSsl={{ .Values.et.grpc.gitsyncSSL }}
-
+    ng.manager.service.url={{ .Values.et.harness.ngManagerURL }}
+    cvng.url={{ .Values.et.harness.cvngURL }}
 
   application-postgresql.properties: |-
     spring.datasource.url=jdbc:postgresql://${DB_URL}/overops?useLegacyDatetimeCode=false&rewriteBatchedStatements=true

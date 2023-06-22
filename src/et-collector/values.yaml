@@ -89,9 +89,9 @@ resources:
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  maxReplicas: 100
+  targetCPU: ""
+  targetMemory: ""
 
 nodeSelector: {}
 
@@ -111,3 +111,24 @@ et:
 
   java:
     heapSize: "1600m"
+
+# extraVolumes:
+#   - name: volume-test
+#     configMap:
+#       name: test-config
+#       # readOnly: true
+extraVolumes: []
+
+# extraVolumeMounts:
+#   - name: volume-test
+#     mountPath: /opt/harness/config
+extraVolumeMounts: []
+
+lifecycleHooks: {}
+# lifecycleHooks:
+#   postStart:
+#     exec:
+#       command:
+#   preStop:
+#     exec:
+#       command:
