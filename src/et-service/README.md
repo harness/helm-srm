@@ -1,6 +1,6 @@
 # et-service
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.3.0](https://img.shields.io/badge/AppVersion-5.3.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.23.1](https://img.shields.io/badge/AppVersion-5.23.1-informational?style=flat-square)
 
 A Helm chart for Harness ET Service
 
@@ -18,7 +18,17 @@ A Helm chart for Harness ET Service
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| autoscaling.targetCPU | string | `""` |  |
+| autoscaling.targetMemory | string | `""` |  |
+| et.dataRetention.batchSize | int | `1000` |  |
+| et.dataRetention.days | int | `90` |  |
+| et.dataRetention.schedule | string | `"0 0 2 * * *"` |  |
+| et.dataRetention.verbose | bool | `false` |  |
+| et.grpc.gitsyncAuthority | string | `"ng-manager:13002"` |  |
+| et.grpc.gitsyncSSL | bool | `false` |  |
+| et.grpc.gitsyncTarget | string | `"ng-manager:13002"` |  |
+| et.harness.cvngURL | string | `"http://cv-nextgen:6060"` |  |
+| et.harness.ngManagerURL | string | `"http://ng-manager:7090"` |  |
 | et.hikari.connectionTimeout | int | `60000` |  |
 | et.hikari.maximumPoolSize | int | `10` |  |
 | et.java.enableHeapDump | bool | `false` |  |
@@ -28,9 +38,28 @@ A Helm chart for Harness ET Service
 | et.redis.host | string | `nil` |  |
 | et.redis.port | int | `6379` |  |
 | et.redis.streamLength | int | `1000` |  |
+| et.redis.streamLengths.AddHit | int | `2500` |  |
+| et.redis.streamLengths.AgentStats | int | `2500` |  |
+| et.redis.streamLengths.Decompile | int | `1000` |  |
+| et.redis.streamLengths.DeferredAgentStats | int | `1000` |  |
+| et.redis.streamLengths.SQL_Insertion | int | `2500` |  |
+| et.redis.streamLengths.SQL_LocInvInsertion | int | `2500` |  |
+| et.redis.streamLengths.SQL_MetricInsertion | int | `2500` |  |
+| et.redis.streamLengths.ServiceStats | int | `1000` |  |
 | et.redis.trimCronExpression | string | `"@hourly"` |  |
 | et.redis.useSentinel | bool | `true` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
+| global.database.postgres.extraArgs | string | `""` |  |
+| global.database.postgres.hosts[0] | string | `"postgres:5432"` |  |
+| global.database.postgres.installed | bool | `true` |  |
+| global.database.postgres.passwordKey | string | `""` |  |
+| global.database.postgres.protocol | string | `"postgres"` |  |
+| global.database.postgres.secretName | string | `""` |  |
+| global.database.postgres.userKey | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
+| global.kubeVersion | string | `""` |  |
 | global.loadbalancerURL | string | `"http://test/abc"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -45,6 +74,7 @@ A Helm chart for Harness ET Service
 | ingress.hosts[0].paths[0].backend.servicePort | int | `9191` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.tls | list | `[]` |  |
+| lifecycleHooks | object | `{}` |  |
 | livenessProbe.enabled | bool | `true` |  |
 | livenessProbe.failureThreshold | int | `3` |  |
 | livenessProbe.initialDelaySeconds | int | `60` |  |
@@ -70,6 +100,7 @@ A Helm chart for Harness ET Service
 | resources.requests.memory | string | `"8Gi"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65534` |  |
+| service.collectorPort | int | `6071` |  |
 | service.port | int | `9191` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |

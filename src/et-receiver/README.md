@@ -1,6 +1,6 @@
 # et-receiver
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.3.0](https://img.shields.io/badge/AppVersion-5.3.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.23.1](https://img.shields.io/badge/AppVersion-5.23.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -19,6 +19,9 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `5` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| et.grpc.gitsyncAuthority | string | `"ng-manager:13002"` |  |
+| et.grpc.gitsyncSSL | bool | `false` |  |
+| et.grpc.gitsyncTarget | string | `"ng-manager:13002"` |  |
 | et.hikari.connectionTimeout | int | `60000` |  |
 | et.hikari.maximumPoolSize | int | `10` |  |
 | et.java.heapSize | string | `"1600m"` |  |
@@ -27,16 +30,36 @@ A Helm chart for Kubernetes
 | et.redis.host | string | `nil` |  |
 | et.redis.port | int | `6379` |  |
 | et.redis.streamLength | int | `500` |  |
+| et.redis.streamLengths.AddHit | int | `2500` |  |
+| et.redis.streamLengths.AgentStats | int | `2500` |  |
+| et.redis.streamLengths.Decompile | int | `1000` |  |
+| et.redis.streamLengths.DeferredAgentStats | int | `1000` |  |
+| et.redis.streamLengths.SQL_Insertion | int | `2500` |  |
+| et.redis.streamLengths.SQL_LocInvInsertion | int | `2500` |  |
+| et.redis.streamLengths.SQL_MetricInsertion | int | `2500` |  |
+| et.redis.streamLengths.ServiceStats | int | `1000` |  |
 | et.redis.trimCronExpression | string | `"@hourly"` |  |
 | et.redis.useSentinel | bool | `true` |  |
 | et.redisQueue.type | string | `"hit"` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
+| global.database.postgres.extraArgs | string | `""` |  |
+| global.database.postgres.hosts[0] | string | `"postgres:5432"` |  |
+| global.database.postgres.installed | bool | `true` |  |
+| global.database.postgres.passwordKey | string | `""` |  |
+| global.database.postgres.protocol | string | `"postgres"` |  |
+| global.database.postgres.secretName | string | `""` |  |
+| global.database.postgres.userKey | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
+| global.kubeVersion | string | `""` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/et-receiver-signed"` |  |
 | image.tag | string | `"5.3.0"` |  |
 | imagePullSecrets | list | `[]` |  |
+| lifecycleHooks | object | `{}` |  |
 | livenessProbe.enabled | bool | `true` |  |
 | livenessProbe.failureThreshold | int | `3` |  |
 | livenessProbe.initialDelaySeconds | int | `40` |  |
@@ -59,9 +82,8 @@ A Helm chart for Kubernetes
 | readinessProbe.successThreshold | int | `1` |  |
 | readinessProbe.timeoutSeconds | int | `1` |  |
 | replicaCount | int | `1` |  |
-| resources.limits.cpu | int | `2` |  |
 | resources.limits.memory | string | `"2Gi"` |  |
-| resources.requests.cpu | string | `"100m"` |  |
+| resources.requests.cpu | string | `"250m"` |  |
 | resources.requests.memory | string | `"2Gi"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65534` |  |

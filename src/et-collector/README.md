@@ -1,6 +1,6 @@
 # et-collector
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.7](https://img.shields.io/badge/AppVersion-5.0.7-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.23.0](https://img.shields.io/badge/AppVersion-5.23.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -16,17 +16,20 @@ A Helm chart for Kubernetes
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | autoscaling.enabled | bool | `false` |  |
-| autoscaling.maxReplicas | int | `5` |  |
+| autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| et.backendURL | string | `"http://et-service:9191"` |  |
+| autoscaling.targetCPU | string | `""` |  |
+| autoscaling.targetMemory | string | `""` |  |
+| et.backendURL | string | `"http://et-service:6071"` |  |
 | et.java.heapSize | string | `"1600m"` |  |
 | et.logLevel | string | `"INFO"` |  |
 | et.redis.enabled | bool | `false` |  |
 | et.redis.host | string | `nil` |  |
 | et.redis.port | int | `6379` |  |
 | et.redis.useSentinel | bool | `true` |  |
-| et.storageTestURL | string | `"http://et-service:9191/service/png"` |  |
+| et.storageTestURL | string | `"http://et-service:6071/service/png"` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -41,6 +44,7 @@ A Helm chart for Kubernetes
 | ingress.hosts[0].paths[0].backend.servicePort | int | `6070` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.tls | list | `[]` |  |
+| lifecycleHooks | object | `{}` |  |
 | livenessProbe.enabled | bool | `true` |  |
 | livenessProbe.failureThreshold | int | `3` |  |
 | livenessProbe.initialDelaySeconds | int | `60` |  |
@@ -60,7 +64,6 @@ A Helm chart for Kubernetes
 | readinessProbe.successThreshold | int | `1` |  |
 | readinessProbe.timeoutSeconds | int | `1` |  |
 | replicaCount | int | `1` |  |
-| resources.limits.cpu | int | `1` |  |
 | resources.limits.memory | string | `"2Gi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
 | resources.requests.memory | string | `"2Gi"` |  |
